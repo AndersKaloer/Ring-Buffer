@@ -10,7 +10,7 @@
 
 /**
  * The size of a ring buffer.
- * Due to the design only \c RING_BUFFER_SIZE-1 \cend items
+ * Due to the design only <tt> RING_BUFFER_SIZE-1 </tt> items
  * can be contained in the buffer.
  * The buffer size must be a power of two.
 */
@@ -23,20 +23,20 @@
 /**
  * The type which is used to hold the size
  * and the indicies of the buffer.
- * Must be able to fit \c RING_BUFFER_SIZE \cend.
+ * Must be able to fit \c RING_BUFFER_SIZE .
  */
 typedef uint8_t ring_buffer_size_t;
 
 /**
  * Used as a modulo operator
- * as \c a % b = (a & (b − 1)) \cend
- * where \c a \cend is a positive index in the buffer and
- * \c b \cend is the (power of two) size of the buffer.
+ * as <tt> a % b = (a & (b − 1)) </tt>
+ * where \c a is a positive index in the buffer and
+ * \c b is the (power of two) size of the buffer.
  */
 #define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
 
 /**
- * Simplifies the use of \c struct ring_buffer_t \cend.
+ * Simplifies the use of <tt>struct ring_buffer_t</tt>.
  */
 typedef struct ring_buffer_t ring_buffer_t;
 
