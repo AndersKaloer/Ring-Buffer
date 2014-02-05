@@ -1,6 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
-#include "../../ringbuffer.h"
+#include "../ringbuffer.h"
 
 int main(void) {
   int i, cnt;
