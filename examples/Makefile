@@ -5,4 +5,4 @@ simple:
 	$(CC) $(CFLAGS) -o simple simple.c ../ringbuffer.c
 
 clean:
-	rm -f simple.o
+	rm -f simple
