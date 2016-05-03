@@ -50,7 +50,7 @@ ring_buffer_size_t ring_buffer_dequeue_arr(ring_buffer_t *buffer, char *data, ri
 
   char *data_ptr = data;
   ring_buffer_size_t cnt = 0;
-  while(ring_buffer_dequeue(buffer, data_ptr) && cnt < len) {
+  while((cnt < len) && ring_buffer_dequeue(buffer, data_ptr)) {
     cnt++;
     data_ptr++;
   }
