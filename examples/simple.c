@@ -49,9 +49,18 @@ int main(void) {
   /* Add new array */
   ring_buffer_queue_arr(&ring_buffer, "Hello again, Ring Buffer!", 26);
   
-  cnt = ring_buffer_dequeue_arr(&ring_buffer, buf_arr, 26);
-  assert(cnt > 0);
-  printf("Read: %s\n", buf_arr);
+  /* Dequeue array in two parts */
+  printf("Read:\n");
+  cnt = ring_buffer_dequeue_arr(&ring_buffer, buf_arr, 13);
+  printf("%d\n", cnt);
+  assert(cnt == 13);
+  /* Add \0 termination before printing */
+  buf_arr[13] = '\0';
+  printf("%s\n", buf_arr);
+  /* Dequeue remaining */
+  cnt = ring_buffer_dequeue_arr(&ring_buffer, buf_arr, 13);
+  assert(cnt == 13);
+  printf("%s", buf_arr);  
   
 
   printf("\n===============\n");
