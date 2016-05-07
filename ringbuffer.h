@@ -112,18 +112,18 @@ inline uint8_t ring_buffer_is_empty(ring_buffer_t *buffer) {
 }
 
 /**
- * Returns the number of items in a ring buffer.
- * @param buffer The buffer for which the number of items should be returned.
- * @return The number of items in the ring buffer.
+ * Returns whether a ring buffer is full.
+ * @param buffer The buffer for which it should be returned whether it is full.
+ * @return 1 if full; 0 otherwise.
  */
 inline uint8_t ring_buffer_is_full(ring_buffer_t *buffer) {
   return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK) == RING_BUFFER_MASK;
 }
 
 /**
- * Returns whether a ring buffer is full.
- * @param buffer The buffer for which it should be returned whether it is full.
- * @return 1 if full; 0 otherwise.
+ * Returns the number of items in a ring buffer.
+ * @param buffer The buffer for which the number of items should be returned.
+ * @return The number of items in the ring buffer.
  */
 inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer) {
   return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK);
