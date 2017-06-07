@@ -25,7 +25,7 @@
  * and the indicies of the buffer.
  * Must be able to fit \c RING_BUFFER_SIZE .
  */
-typedef uint8_t ring_buffer_size_t;
+typedef uint32_t ring_buffer_size_t;
 
 /**
  * Used as a modulo operator
