@@ -91,7 +91,7 @@ uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data);
  * @param len The maximum number of bytes to return.
  * @return The number of bytes returned.
  */
-uint8_t ring_buffer_dequeue_arr(ring_buffer_t *buffer, char *data, ring_buffer_size_t len);
+ring_buffer_size_t ring_buffer_dequeue_arr(ring_buffer_t *buffer, char *data, ring_buffer_size_t len);
 /**
  * Peeks a ring buffer, i.e. returns an element without removing it.
  * @param buffer The buffer from which the data should be returned.

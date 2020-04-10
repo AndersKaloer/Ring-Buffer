@@ -31,7 +31,7 @@ void ring_buffer_queue_arr(ring_buffer_t *buffer, const char *data, ring_buffer_
   }
 }
 
-ring_buffer_size_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data) {
+uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data) {
   if(ring_buffer_is_empty(buffer)) {
     /* No items */
     return 0;
@@ -57,7 +57,7 @@ ring_buffer_size_t ring_buffer_dequeue_arr(ring_buffer_t *buffer, char *data, ri
   return cnt;
 }
 
-ring_buffer_size_t ring_buffer_peek(ring_buffer_t *buffer, char *data, ring_buffer_size_t index) {
+uint8_t ring_buffer_peek(ring_buffer_t *buffer, char *data, ring_buffer_size_t index) {
   if(index >= ring_buffer_num_items(buffer)) {
     /* No items at index */
     return 0;
@@ -71,5 +71,5 @@ ring_buffer_size_t ring_buffer_peek(ring_buffer_t *buffer, char *data, ring_buff
 
 extern inline uint8_t ring_buffer_is_empty(ring_buffer_t *buffer);
 extern inline uint8_t ring_buffer_is_full(ring_buffer_t *buffer);
-extern inline uint8_t ring_buffer_num_items(ring_buffer_t *buffer);
+extern inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer);
 
