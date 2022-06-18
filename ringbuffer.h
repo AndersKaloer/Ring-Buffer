@@ -8,6 +8,11 @@
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /**
  * The size of a ring buffer.
  * Due to the design only <tt> RING_BUFFER_SIZE-1 </tt> items
@@ -128,5 +133,9 @@ inline uint8_t ring_buffer_is_full(ring_buffer_t *buffer) {
 inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer) {
   return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK);
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* RINGBUFFER_H */
