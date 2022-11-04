@@ -5,12 +5,13 @@ A simple ring buffer (circular buffer) designed for embedded systems.
 
 An example is given in [examples/simple.c](examples/simple.c).
 
-The size of the buffer can be configured by changing the value of `RING_BUFFER_SIZE` in `ring_buffer.h`. Note that `RING_BUFFER_SIZE` must be a power-of-two.
+The size of the provided memory buffer must be a power-of-two.
 
-A new ring buffer is created using the `ring_buffer_init(buffer)` function:
+A new ring buffer is created using the ` ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr))` function:
 ```c
+char buf_arr[64];
 ring_buffer_t ring_buffer;
-ring_buffer_init(&ring_buffer);
+ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr));
 ```
 
 The module provides the following functions for accessing the ring buffer (documentation can be found in [ringbuffer.h](ringbuffer.h)):
