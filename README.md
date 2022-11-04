@@ -7,11 +7,11 @@ An example is given in [examples/simple.c](examples/simple.c).
 
 The size of the memory buffer must be a power-of-two.
 
-A new ring buffer is created using the ` ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr))` function:
+A new ring buffer is created using the ` ring_buffer_init(&ring_buffer, buff, sizeof(buff))` function:
 ```c
-char buf_arr[64];
+char buff[64];
 ring_buffer_t ring_buffer;
-ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr));
+ring_buffer_init(&ring_buffer, buff, sizeof(buff));
 ```
 
 The module provides the following functions for accessing the ring buffer (documentation can be found in [ringbuffer.h](ringbuffer.h)):

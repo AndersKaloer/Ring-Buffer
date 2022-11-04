@@ -5,11 +5,12 @@
 int main(void) {
   int i, cnt;
   char buf;
-  char buf_arr[128];
+  char provided_buff[128];
+  char buf_arr[50];
   
   /* Create and initialize ring buffer */
   ring_buffer_t ring_buffer;
-  ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr));
+  ring_buffer_init(&ring_buffer, provided_buff, sizeof(provided_buff));
   
   /* Add elements to buffer; one at a time */
   for(i = 0; i < 100; i++) {
