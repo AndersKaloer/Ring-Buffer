@@ -5,7 +5,7 @@ A simple ring buffer (circular buffer) designed for embedded systems.
 
 An example is given in [examples/simple.c](examples/simple.c).
 
-The size of the provided memory buffer must be a power-of-two.
+The size of the memory buffer must be a power-of-two.
 
 A new ring buffer is created using the ` ring_buffer_init(&ring_buffer, buf_arr, sizeof(buf_arr))` function:
 ```c
