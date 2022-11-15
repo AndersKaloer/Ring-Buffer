@@ -39,7 +39,7 @@ typedef size_t ring_buffer_size_t;
  * where \c a is a positive index in the buffer and
  * \c b is the (power of two) size of the buffer.
  */
-#define RING_BUFFER_MASK(rb) (rb->buffer_size -1 )
+#define RING_BUFFER_MASK(rb) (rb->buffer_mask)
 
 /**
  * Simplifies the use of <tt>struct ring_buffer_t</tt>.
@@ -54,8 +54,8 @@ typedef struct ring_buffer_t ring_buffer_t;
 struct ring_buffer_t {
   /** Buffer memory. */
   char *buffer;
-  /** Buffer size. */
-  ring_buffer_size_t buffer_size;
+  /** Buffer mask. */
+  ring_buffer_size_t buffer_mask;
   /** Index of tail. */
   ring_buffer_size_t tail_index;
   /** Index of head. */
