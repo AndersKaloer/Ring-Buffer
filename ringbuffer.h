@@ -13,7 +13,7 @@ extern "C"
 {
 #endif
 
-/* #define RINGBUFFER_ASSERT(exp) */
+#include "ringbuffer_assert.h"
 
 #ifndef RINGBUFFER_ASSERT
 #error "Please define an ASSERT function"
