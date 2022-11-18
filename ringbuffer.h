@@ -1,5 +1,6 @@
 #include <inttypes.h>
 #include <stddef.h>
+#include <assert.h>
 /**
  * @file
  * Prototypes and structures for the ring buffer module.
@@ -13,11 +14,7 @@ extern "C"
 {
 #endif
 
-#include "ringbuffer_assert.h"
-
-#ifndef RINGBUFFER_ASSERT
-#error "Please define an ASSERT function"
-#endif
+#define RINGBUFFER_ASSERT(x) assert(x)
 
 /**
  * Checks if the buffer_size is a power of two.
