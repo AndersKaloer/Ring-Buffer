@@ -5,7 +5,10 @@
  * Implementation of ring buffer functions.
  */
 
-void ring_buffer_init(ring_buffer_t *buffer) {
+void ring_buffer_init(ring_buffer_t *buffer, char *buf, size_t buf_size) {
+  RING_BUFFER_ASSERT(RING_BUFFER_IS_POWER_OF_TWO(buf_size) == 1);
+  buffer->buffer = buf;
+  buffer->buffer_mask = buf_size - 1;
   buffer->tail_index = 0;
   buffer->head_index = 0;
 }
@@ -15,12 +18,12 @@ void ring_buffer_queue(ring_buffer_t *buffer, char data) {
   if(ring_buffer_is_full(buffer)) {
     /* Is going to overwrite the oldest byte */
     /* Increase tail index */
-    buffer->tail_index = ((buffer->tail_index + 1) & RING_BUFFER_MASK);
+    buffer->tail_index = ((buffer->tail_index + 1) & RING_BUFFER_MASK(buffer));
   }
 
   /* Place data in buffer */
   buffer->buffer[buffer->head_index] = data;
-  buffer->head_index = ((buffer->head_index + 1) & RING_BUFFER_MASK);
+  buffer->head_index = ((buffer->head_index + 1) & RING_BUFFER_MASK(buffer));
 }
 
 void ring_buffer_queue_arr(ring_buffer_t *buffer, const char *data, ring_buffer_size_t size) {
@@ -38,7 +41,7 @@ uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data) {
   }
   
   *data = buffer->buffer[buffer->tail_index];
-  buffer->tail_index = ((buffer->tail_index + 1) & RING_BUFFER_MASK);
+  buffer->tail_index = ((buffer->tail_index + 1) & RING_BUFFER_MASK(buffer));
   return 1;
 }
 
@@ -64,7 +67,7 @@ uint8_t ring_buffer_peek(ring_buffer_t *buffer, char *data, ring_buffer_size_t i
   }
   
   /* Add index to pointer */
-  ring_buffer_size_t data_index = ((buffer->tail_index + index) & RING_BUFFER_MASK);
+  ring_buffer_size_t data_index = ((buffer->tail_index + index) & RING_BUFFER_MASK(buffer));
   *data = buffer->buffer[data_index];
   return 1;
 }

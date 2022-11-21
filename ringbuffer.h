@@ -1,5 +1,6 @@
 #include <inttypes.h>
-
+#include <stddef.h>
+#include <assert.h>
 /**
  * @file
  * Prototypes and structures for the ring buffer module.
@@ -13,24 +14,21 @@ extern "C"
 {
 #endif
 
+#define RING_BUFFER_ASSERT(x) assert(x)
+
 /**
- * The size of a ring buffer.
+ * Checks if the buffer_size is a power of two.
  * Due to the design only <tt> RING_BUFFER_SIZE-1 </tt> items
  * can be contained in the buffer.
- * The buffer size must be a power of two.
+ * buffer_size must be a power of two.
 */
-#define RING_BUFFER_SIZE 128
-
-#if (RING_BUFFER_SIZE & (RING_BUFFER_SIZE - 1)) != 0
-#error "RING_BUFFER_SIZE must be a power of two"
-#endif
+#define RING_BUFFER_IS_POWER_OF_TWO(buffer_size) ((buffer_size & (buffer_size - 1)) == 0)
 
 /**
  * The type which is used to hold the size
  * and the indicies of the buffer.
- * Must be able to fit \c RING_BUFFER_SIZE .
  */
-typedef uint8_t ring_buffer_size_t;
+typedef size_t ring_buffer_size_t;
 
 /**
  * Used as a modulo operator
@@ -38,7 +36,7 @@ typedef uint8_t ring_buffer_size_t;
  * where \c a is a positive index in the buffer and
  * \c b is the (power of two) size of the buffer.
  */
-#define RING_BUFFER_MASK (RING_BUFFER_SIZE-1)
+#define RING_BUFFER_MASK(rb) (rb->buffer_mask)
 
 /**
  * Simplifies the use of <tt>struct ring_buffer_t</tt>.
@@ -52,7 +50,9 @@ typedef struct ring_buffer_t ring_buffer_t;
  */
 struct ring_buffer_t {
   /** Buffer memory. */
-  char buffer[RING_BUFFER_SIZE];
+  char *buffer;
+  /** Buffer mask. */
+  ring_buffer_size_t buffer_mask;
   /** Index of tail. */
   ring_buffer_size_t tail_index;
   /** Index of head. */
@@ -63,8 +63,10 @@ struct ring_buffer_t {
  * Initializes the ring buffer pointed to by <em>buffer</em>.
  * This function can also be used to empty/reset the buffer.
  * @param buffer The ring buffer to initialize.
+ * @param buf The buffer allocated for the ringbuffer.
+ * @param buf_size The size of the allocated ringbuffer.
  */
-void ring_buffer_init(ring_buffer_t *buffer);
+void ring_buffer_init(ring_buffer_t *buffer, char *buf, size_t buf_size);
 
 /**
  * Adds a byte to a ring buffer.
@@ -122,7 +124,7 @@ inline uint8_t ring_buffer_is_empty(ring_buffer_t *buffer) {
  * @return 1 if full; 0 otherwise.
  */
 inline uint8_t ring_buffer_is_full(ring_buffer_t *buffer) {
-  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK) == RING_BUFFER_MASK;
+  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK(buffer)) == RING_BUFFER_MASK(buffer);
 }
 
 /**
@@ -131,7 +133,7 @@ inline uint8_t ring_buffer_is_full(ring_buffer_t *buffer) {
  * @return The number of items in the ring buffer.
  */
 inline ring_buffer_size_t ring_buffer_num_items(ring_buffer_t *buffer) {
-  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK);
+  return ((buffer->head_index - buffer->tail_index) & RING_BUFFER_MASK(buffer));
 }
 
 #ifdef __cplusplus
