@@ -5,10 +5,10 @@
  * Implementation of ring buffer functions.
  */
 
-void ring_buffer_init(ring_buffer_t *buffer, char *buff, size_t buff_size) {
-  RINGBUFFER_ASSERT(IS_POWER_OF_TWO(buff_size) == 1);
-  buffer->buffer = buff;
-  buffer->buffer_mask = buff_size - 1;
+void ring_buffer_init(ring_buffer_t *buffer, char *buf, size_t buf_size) {
+  RING_BUFFER_ASSERT(RING_BUFFER_IS_POWER_OF_TWO(buf_size) == 1);
+  buffer->buffer = buf;
+  buffer->buffer_mask = buf_size - 1;
   buffer->tail_index = 0;
   buffer->head_index = 0;
 }

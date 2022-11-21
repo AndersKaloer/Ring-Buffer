@@ -14,7 +14,7 @@ extern "C"
 {
 #endif
 
-#define RINGBUFFER_ASSERT(x) assert(x)
+#define RING_BUFFER_ASSERT(x) assert(x)
 
 /**
  * Checks if the buffer_size is a power of two.
@@ -22,7 +22,7 @@ extern "C"
  * can be contained in the buffer.
  * buffer_size must be a power of two.
 */
-#define IS_POWER_OF_TWO(buffer_size) ((buffer_size & (buffer_size - 1)) == 0)
+#define RING_BUFFER_IS_POWER_OF_TWO(buffer_size) ((buffer_size & (buffer_size - 1)) == 0)
 
 /**
  * The type which is used to hold the size
@@ -63,10 +63,10 @@ struct ring_buffer_t {
  * Initializes the ring buffer pointed to by <em>buffer</em>.
  * This function can also be used to empty/reset the buffer.
  * @param buffer The ring buffer to initialize.
- * @param buff The buffer allocated for the ringbuffer
- * @param buff_size The size of the allocated ringbuffer
+ * @param buf The buffer allocated for the ringbuffer.
+ * @param buf_size The size of the allocated ringbuffer.
  */
-void ring_buffer_init(ring_buffer_t *buffer, char *buff, size_t buff_size);
+void ring_buffer_init(ring_buffer_t *buffer, char *buf, size_t buf_size);
 
 /**
  * Adds a byte to a ring buffer.
