@@ -62,6 +62,7 @@ struct ring_buffer_t {
 /**
  * Initializes the ring buffer pointed to by <em>buffer</em>.
  * This function can also be used to empty/reset the buffer.
+ * The resulting buffer can contain <em>buf_size-1</em> bytes.
  * @param buffer The ring buffer to initialize.
  * @param buf The buffer allocated for the ringbuffer.
  * @param buf_size The size of the allocated ringbuffer.
