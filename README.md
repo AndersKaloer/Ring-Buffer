@@ -3,7 +3,7 @@ Ring-Buffer
 
 A simple ring buffer (circular buffer) designed for embedded systems.
 
-An example is given in [examples/simple.c](examples/simple.c).
+Examples are given in [examples/simple.c](examples/simple.c) and [examples/tail.c](examples/tail.c).
 
 The size of the memory buffer must be a power-of-two, and the ring buffer can contain at most `buf_size-1` bytes.
 
