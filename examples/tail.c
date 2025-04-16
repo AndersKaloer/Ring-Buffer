@@ -8,7 +8,8 @@
 #include "../ringbuffer.h"
 
 int main() {
-  char c;
+  int c;
+  char d;
   char data[16];
   struct ring_buffer_t buffer;
   ring_buffer_init(&buffer, data, sizeof(data));
@@ -16,8 +17,8 @@ int main() {
   while ((c = getchar()) != EOF)
     ring_buffer_queue(&buffer, c);
 
-  while (ring_buffer_dequeue(&buffer, &c))
-    putchar(c);
+  while (ring_buffer_dequeue(&buffer, &d))
+    putchar(d);
 
   return 0;
 }
